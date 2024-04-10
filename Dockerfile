@@ -7,4 +7,6 @@ COPY . .
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 # Run the application when the container launches
+EXPOSE 7065
+
 CMD sh -c 'gunicorn -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:7065 app:app'
