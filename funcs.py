@@ -3,9 +3,14 @@ from openai import OpenAI
 from anthropic import Anthropic
 
 # OpenAI
-async def request_openai(api_keyy,messagess,modell):
+async def request_openai(api_keyy,base_url,messagess,modell):
+    
+    if base_url == "Default":
+        base_url = None
+        
     client = OpenAI(
-        api_key=api_keyy
+        api_key=api_keyy,
+        base_url=base_url
     )
 
     chat_completion = client.chat.completions.create(
@@ -16,10 +21,14 @@ async def request_openai(api_keyy,messagess,modell):
     
     return chat_completion.choices[0].message.content
 
-async def request_claude(api_keyy,messagess,modell):
+async def request_claude(api_keyy,base_url,messagess,modell):
+    
+    if base_url == "Default":
+        base_url = None
     
     claude = Anthropic(
-        api_key=api_keyy
+        api_key=api_keyy,
+        base_url=base_url
     )
     
     req = claude.messages.create(

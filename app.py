@@ -11,15 +11,16 @@ class Messages(BaseModel):
 
 class BaseAI(BaseModel):
     api_key : str
+    base_url : str = Field(default="Default")
 
 class InputGptData(BaseAI):
     model : str = Field(default="gpt-3.5-turbo")
     messages : list[Messages] = Field(default=[{"role":"assistant","content":"hello world!"}])
 
 class InputClaudeData(BaseAI):
-    model : str = Field(default="claude-v1")
+    model : str = Field(default="claude-3-sonnet-20240229")
     messages : list[Messages] = Field(default=[{"role":"assistant","content":"hello world!"}])
-
+    
 class OutputData(BaseModel):
     output: str = Field(default="Answer from AI")
 
