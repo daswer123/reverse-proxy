@@ -26,10 +26,10 @@ class OutputData(BaseModel):
 
 @app.post("/gpt",response_model=OutputData,description="Simple request to OpenAI API")
 async def gpt(data: InputGptData):
-    output = await request_openai(data.api_key, data.messages, data.model)
+    output = await request_openai(data.api_key,data.base_url, data.messages, data.model)
     return output
 
 @app.post("/claude",response_model=OutputData,description="Simple request to Claude API")
 async def claude(data: InputClaudeData):
-    output = await request_claude(data.api_key, data.messages, data.model)
+    output = await request_claude(data.api_key,data.base_url,, data.messages, data.model)
     return output
